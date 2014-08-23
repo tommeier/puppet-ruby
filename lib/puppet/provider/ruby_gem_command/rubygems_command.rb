@@ -50,7 +50,7 @@ Puppet::Type.type(:ruby_gem_command).provide(:rubygems_command) do
   def query
     {
       :name         => "#{@resource[:command]} for ruby #{@resource[:ruby_version]}",
-      :ensure       => :present,
+      :ensure       => :absent,
       :gem          => @resource[:gem],
       :ruby_version => @resource[:ruby_version],
       :command      => @resource[:command],
