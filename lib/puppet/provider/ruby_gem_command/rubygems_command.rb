@@ -24,6 +24,24 @@ Puppet::Type.type(:ruby_gem_command).provide(:rubygems_command) do
     self.class.ruby_versions
   end
 
+  # Duplicate of rubygem
+  def self.gemlist
+    return @gemlist if defined?(@gemlist)
+
+    mapping = Hash.new { |h,k| h[k] = {} }
+
+    Dir["/opt/rubies/*"].each do |ruby|
+      v = File.basename(ruby)
+      mapping[v] = Array.new
+
+      Dir["#{ruby}/lib/ruby/gems/*/gems/*"].each do |g|
+        mapping[v] << File.basename(g)
+      end
+    end
+
+    @gemlist = mapping
+  end
+
   def query
     if @resource[:ruby_version] == "*"
       installed = ruby_versions.all? { |r| installed_for? r }
