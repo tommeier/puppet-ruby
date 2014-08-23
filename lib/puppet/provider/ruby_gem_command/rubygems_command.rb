@@ -34,7 +34,7 @@ Puppet::Type.type(:ruby_gem_command).provide(:rubygems_command) do
         target_versions = [@resource[:ruby_version]]
       end
       target_versions.reject { |r| installed_for? r }.each do |ruby|
-        gem_command @resource[:title], ruby
+        gem_command @resource[:command], ruby
       end
     end
   rescue => e

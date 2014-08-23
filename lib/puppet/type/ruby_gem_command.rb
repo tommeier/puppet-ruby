@@ -18,6 +18,15 @@ Puppet::Type.newtype(:ruby_gem_command) do
     end
   end
 
+  newparam(:command) do
+    validate do |v|
+      unless v.is_a? String
+        raise Puppet::ParseError,
+          "Expected command to be a String, got a #{v.class.name}"
+      end
+    end
+  end
+
   newparam(:ruby_version) do
     validate do |v|
       unless v.is_a? String
