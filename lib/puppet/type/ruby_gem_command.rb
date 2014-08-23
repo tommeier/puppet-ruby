@@ -13,7 +13,17 @@ Puppet::Type.newtype(:ruby_gem_command) do
     end
 
     def insync?(is)
-      true
+      @should.each { |should|
+        case should
+        when :present
+          return true unless is == :absent
+        when :absent
+          return true if is == :absent
+        when *Array(is)
+          return true
+        end
+      }
+      false
     end
   end
 
