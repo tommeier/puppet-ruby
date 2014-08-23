@@ -9,6 +9,14 @@ Puppet::Type.newtype(:ruby_gem_command) do
     defaultto :present
   end
 
+  def retrieve
+    provider.query[:ensure]
+  end
+
+  def insync?(is)
+    true
+  end
+
   newparam(:gem) do
     validate do |v|
       unless v.is_a? String
