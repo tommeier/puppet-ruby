@@ -101,7 +101,8 @@ private
 
   def gem_command(command, ruby_version)
     bindir = "/opt/rubies/#{ruby_version}/bin"
-    execute "#{bindir}/#{command}", {
+    cwd = @resource[:cwd] ? "cd #{@resource[:cwd]} && " : ""
+    execute "#{cwd}#{bindir}/#{command}", {
       :combine            => true,
       :failonfail         => true,
       :uid                => user,
@@ -109,6 +110,7 @@ private
         "PATH" => env_path(bindir),
         "GEM_PATH" => nil,
         "LANG" => ENV['LANG'] || "en_US.UTF-8",
+        "LC_ALL" => ENV['LC_ALL'] || "en_US.UTF-8"
         "HOME" => ENV['HOME'] || ""
       }
     }

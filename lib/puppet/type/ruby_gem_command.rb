@@ -28,6 +28,7 @@ Puppet::Type.newtype(:ruby_gem_command) do
   end
 
   newparam(:online_required)
+  newparam(:cwd)
 
   newparam(:name) do
     isnamevar
