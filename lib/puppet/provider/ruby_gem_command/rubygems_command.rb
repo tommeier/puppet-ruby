@@ -124,18 +124,9 @@ private
     Facter.value(:boxen_user) || Facter.value(:id)
   end
 
-  def version(v)
-    Gem::Version.new(v)
-  end
-
-  def requirement
-    Gem::Requirement.new(@resource[:version])
-  end
-
   def installed_for?(ruby_version)
     installed_gems[ruby_version].any? { |g|
       g[:gem] == @resource[:gem] \
-        && requirement.satisfied_by?(version(g[:version])) \
         && g[:ruby_version] == ruby_version
     }
   end
