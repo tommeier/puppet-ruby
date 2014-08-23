@@ -7,14 +7,14 @@ Puppet::Type.newtype(:ruby_gem_command) do
     end
 
     defaultto :present
-  end
 
-  def retrieve
-    provider.query[:ensure]
-  end
+    def retrieve
+      provider.query[:ensure]
+    end
 
-  def insync?(is)
-    true
+    def insync?(is)
+      true
+    end
   end
 
   newparam(:gem) do

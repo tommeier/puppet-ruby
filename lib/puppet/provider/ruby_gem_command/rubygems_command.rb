@@ -48,21 +48,13 @@ Puppet::Type.type(:ruby_gem_command).provide(:rubygems_command) do
   end
 
   def query
-    if @resource[:ruby_version] == "*"
-      installed = ruby_versions.all? { |r| installed_for? r }
-    else
-      installed = installed_for? @resource[:ruby_version]
-    end
     {
-      :name         => "#{@resource[:command]} for all rubies",
+      :name         => "#{@resource[:command]} for ruby #{@resource[:ruby_version]}",
       :ensure       => :present,
       :gem          => @resource[:gem],
       :ruby_version => @resource[:ruby_version],
       :command      => @resource[:command],
     }
-
-  rescue => e
-    raise Puppet::Error, "#{e.message}: #{e.backtrace.join('\n')}"
   end
 
   def create
