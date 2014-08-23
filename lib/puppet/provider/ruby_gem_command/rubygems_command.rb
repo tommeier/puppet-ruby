@@ -108,7 +108,8 @@ private
       :custom_environment => {
         "PATH" => env_path(bindir),
         "GEM_PATH" => nil,
-        "LANG" => ENV['LANG'] || "en_US.UTF-8"
+        "LANG" => ENV['LANG'] || "en_US.UTF-8",
+        "HOME" => ENV['HOME'] || ""
       }
     }
   end
