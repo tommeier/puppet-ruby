@@ -13,16 +13,7 @@ Puppet::Type.newtype(:ruby_gem_command) do
     end
 
     def insync?(is)
-      @should.each { |should|
-        case should
-        when :present
-          return true unless is == :absent
-        when :absent
-          return true if is == :absent
-        when *Array(is)
-          return true
-        end
-      }
+      # Always fire command
       false
     end
   end
