@@ -42,6 +42,11 @@ Puppet::Type.type(:ruby_gem_command).provide(:rubygems_command) do
     @gemlist = mapping
   end
 
+  # Duplicate of rubygems
+  def gemlist
+    self.class.gemlist
+  end
+
   def query
     if @resource[:ruby_version] == "*"
       installed = ruby_versions.all? { |r| installed_for? r }
