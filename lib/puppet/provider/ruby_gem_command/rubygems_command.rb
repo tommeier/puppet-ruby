@@ -66,7 +66,7 @@ Puppet::Type.type(:ruby_gem_command).provide(:rubygems_command) do
       else
         target_versions = [@resource[:ruby_version]]
       end
-      target_versions.reject { |r| installed_for? r }.each do |ruby|
+      target_versions.each do |ruby|
         gem_command @resource[:command], ruby
       end
     end
@@ -114,13 +114,6 @@ private
 
   def user
     Facter.value(:boxen_user) || Facter.value(:id)
-  end
-
-  def installed_for?(ruby_version)
-    installed_gems[ruby_version].any? { |g|
-      g[:gem] == @resource[:gem] \
-        && g[:ruby_version] == ruby_version
-    }
   end
 
   def installed_gems
