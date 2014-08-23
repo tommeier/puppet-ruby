@@ -27,14 +27,7 @@ Puppet::Type.newtype(:ruby_gem_command) do
     end
   end
 
-  newparam(:online_required) do
-    validate do |v|
-      unless v && v.is_a? Boolean
-        raise Puppet::ParseError,
-          "Expected online_required to be a boolean, got a #{v.class.name}"
-      end
-    end
-  end
+  newparam(:online_required)
 
   newparam(:name) do
     isnamevar
